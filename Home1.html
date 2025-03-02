@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GNANESWAR | Portfolio</title>
+        
+        <!-- Favicon (Logo in Title Tab) -->
+        <link rel="icon" type="image/png" href="./AG logo.jpeg">
+        
+        <style>
+            /* Cursor blinking animation */
+            .typing-cursor {
+                animation: blink 0.7s infinite;
+                font-weight: bold;
+            }
+            
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+        </style>
+        
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    
+
+
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-sm z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-indigo-600">GNANESWAR ARNEPALLI</a>
+            <div class="hidden md:flex space-x-10">
+                <a href="#about" class="text-gray-700 hover:text-indigo-600 transition-colors">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-indigo-600 transition-colors">Skills</a>
+                <a href="#projects" class="text-gray-700 hover:text-indigo-600 transition-colors">Projects</a>
+                <a href="#experience" class="text-gray-700 hover:text-indigo-600 transition-colors">Certifications</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden focus:outline-none" id="menu-toggle">
+                <i class="fas fa-bars text-gray-700"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white w-full" id="mobile-menu">
+            <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
+                <a href="#about" class="text-gray-700 hover:text-indigo-600 transition-colors">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-indigo-600 transition-colors">Skills</a>
+                <a href="#projects" class="text-gray-700 hover:text-indigo-600 transition-colors">Projects</a>
+                <a href="#experience" class="text-gray-700 hover:text-indigo-600 transition-colors">Certifications</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+<!-- Hero Section -->
+<section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+    <div class="container mx-auto px-6 py-10 flex flex-col-reverse md:flex-row items-center">
+        <div class="md:w-1/2 text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm 
+                <span id="typing-text" class="text-yellow-300"></span>
+                <span class="typing-cursor text-yellow-300">|</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl mb-6">Creative Mindset</h2>
+           
+            <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#projects" class="px-8 py-3 bg-white text-indigo-600 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition-colors">View My projects</a>
+                <a href="#contact" class="px-8 py-3 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-indigo-600 transition-colors">Contact Me</a>
+            </div>
+        </div>
+        <div class="md:w-1/2 mb-10 md:mb-0 ">
+            <div class="relative mx-auto w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                <!-- Updated image path -->
+                <img src="./jhonny.jpeg" alt="Profile Picture"  
+                class="w-[700px] h-[800px] object-cover object-center">
+           
+            </div>
+        </div>
+        
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typingElement = document.getElementById('typing-text');
+        const phrases = [ "GNANESWAR ARNEPALLI","Frontend developer"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100; // Base typing speed in ms
+        
+        function typeText() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            // If deleting
+            if (isDeleting) {
+                // Remove a character
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50; // Faster when deleting
+            } else {
+                // Add a character
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100; // Normal speed when typing
+            }
+            
+            // If completed typing the phrase
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                // Pause at the end of typing
+                isDeleting = true;
+                typingSpeed = 1000; // Wait 1 second before starting to delete
+            } 
+            // If completed deleting the phrase
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                // Move to next phrase
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                // Pause before typing next phrase
+                typingSpeed = 500;
+            }
+            
+            // Schedule next character
+            setTimeout(typeText, typingSpeed);
+        }
+        
+        // Start the typing animation
+        typeText();
+    });
+</script>
+
+   <!-- About Section -->
+   <section id="about" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About Me</h2>
+            <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 mb-8"></div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center">
+            
+            <!-- Left Side: About Content -->
+            <div class="md:w-1/2 md:pr-12 bg-white p-8 rounded-2xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">Who I Am</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    I'm Gnaneswar Arnepalli, an aspiring software developer with experience in web development, IoT, and Salesforce technologies.
+                    Currently pursuing my B.Tech in Computer Science Engineering, I have worked on projects like a task management application,
+                    an electives management system, and an IoT-based ATM security system. I am always eager to explore new technologies and enhance my problem-solving skills through real-world applications.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Beyond coding, I am a passionate folk dancer and enjoy team sports like cricket and kabaddi, which have strengthened my teamwork and creative thinking.
+                    I believe in continuous learning and strive to expand my technical expertise while bringing innovation, flexibility, and dedication to every project I undertake.
+                </p>
+            </div>
+
+            <!-- Right Side: Personal Info + Social Links -->
+            <div class="md:w-1/2 bg-gray-200 p-8 rounded-2xl shadow-lg mt-10 md:mt-0">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">Personal Info</h3>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <p class="font-medium text-gray-800">Name:</p>
+                        <p class="text-gray-600">Gnaneswar Arnepalli</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">Email:</p>
+                        <p class="text-gray-600">gnaneswararnepalli074@gmail.com</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">mobile no:</p>
+                        <p class="text-gray-600">9390341933</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">SSC:</p>
+                        <p class="font-medium text-gray-800">(Sri Chaitanya Vidyaniketan School)</p>
+                        <p class="text-gray-600">9.5 CGPA(2019 passout)</p>
+                        
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">INTER:</p>
+                        <p class="font-medium text-gray-800">(Narayan Junnior College)</p>
+                        <p class="text-gray-600">9.38 CGPA(2021 passout)</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">B.TECH:</p>
+                        <p class="font-medium text-gray-800">(Lendi Institute of Engineering and Technology)</p>
+                        <p class="text-gray-600">7.9 CGPA (Tentative passout 2025 )</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">From:</p>
+                        <p class="text-gray-600">Bobbili,Andhra pradesh</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">Availability:</p>
+                        <p class="text-indigo-600 font-medium">Waiting For an Opportunity </p>
+                    </div>
+                </div>
+               
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+   <!-- Skills Section -->
+<section id="skills" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">My Skills</h2>
+            <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 mb-8"></div>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                I have hands-on experience in web development, backend technologies, IoT, and ML applications.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Frontend Development -->
+            <div class="bg-white rounded-lg shadow-lg p-8 transition-transform hover:-translate-y-2">
+                <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-code text-3xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Frontend Development</h3>
+                <p class="text-gray-600 mb-4">Building responsive, user-friendly interfaces.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">HTML5</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">CSS3</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">JavaScript</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Bootstrap</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Tailwind CSS</span>
+                </div>
+            </div>
+
+            <!-- Backend Development -->
+            <div class="bg-white rounded-lg shadow-lg p-8 transition-transform hover:-translate-y-2">
+                <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-server text-3xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Backend Development</h3>
+                <p class="text-gray-600 mb-4">Developing scalable server-side applications.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Java</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Spring Boot</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">PHP</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">SQL</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Flask</span>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="bg-white rounded-lg shadow-lg p-8 transition-transform hover:-translate-y-2">
+                <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-brain text-3xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800"> Machine Learning</h3>
+                <p class="text-gray-600 mb-4">Building ML models for real-world applications.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Python</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Machine Learning</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Google Colab</span>
+                    
+                    </div>
+            </div>
+
+            <!-- IoT & Embedded Systems -->
+            <div class="bg-white rounded-lg shadow-lg p-8 transition-transform hover:-translate-y-2">
+                <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-microchip text-3xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">IoT & Embedded Systems</h3>
+                <p class="text-gray-600 mb-4">Developing smart solutions using IoT.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Arduino</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Sensors</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Embedded C</span>
+                </div>
+            </div>
+
+            <!-- CRM & Salesforce -->
+            <div class="bg-white rounded-lg shadow-lg p-8 transition-transform hover:-translate-y-2">
+                <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-cloud text-3xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">CRM & Salesforce</h3>
+                <p class="text-gray-600 mb-4">Working with cloud-based CRM solutions.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Salesforce</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Apex</span>
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">Lightning Web Components</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">My Projects</h2>
+                <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Here are some of my recent projects that showcase my skills and approach to problem-solving.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <!-- Replace with project image -->
+                        <img src="./gmrit.png" alt="Project 1" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-6">
+                                <div class="flex space-x-3 mb-4">
+                                    <a href="http://127.0.0.1:5500/index.html" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                    <a href=" https://github.com/Gnaneswar-Arnepalli/Electives-Management" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Elective Course Website</h3>
+                        <p class="text-gray-600 mb-4">The Electives Management project is designed to simplify the elective selection process for students in engineering or other degree programs.
+                             Traditionally, the process relies heavily on paperwork, 
+                             which can be cumbersome and time-consuming for both students and administrative staff.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">JavaScript</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">PHP</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">CSS</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">HTML</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <!-- Replace with project image -->
+                        <img src="./todo.png" alt="Project 2" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-6">
+                                <div class="flex space-x-3 mb-4">
+                                    <a href="https://gnaneswartodo.ccbp.tech/" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                    <a href="https://github.com/Gnaneswar-Arnepalli/TODO-WEBSITE" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Task Management App</h3>
+                        <p class="text-gray-600 mb-4">  Streamlined task management through a combination of HTML, CSS, and Bootstrap for an intuitive interface.
+                             Seamless CRUD operations through JavaScript event listeners and dynamic UI updates. 
+                             Secure task persistence with local storage methods,ensuring that your tasks are always available.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">JavaScript</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">Bootstrap</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">CSS</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">HTML</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <!-- Replace with project image -->
+                        <img src="./iot.jpg" alt="Project 3" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-6">
+                                <div class="flex space-x-3 mb-4">
+                                      <a href="https://github.com/Gnaneswar-Arnepalli/Enhancing-Security-and-Protection-for-ATM-s/tree/main" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Enhancing-Security-and-Protection-for-ATM-s </h3>
+                        <p class="text-gray-600 mb-4">It's an IOT based project were our motive to enhance the security measures in ATM's 
+                            to prevent them from the theft.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">C++</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"></span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"></span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition-colors">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">My Certifications</h2>
+                <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Here are some certifications that validate my technical skills and knowledge.</p>
+            </div>
+            <div class="flex flex-col max-w-3xl mx-auto">
+                <!-- Certification 1: Salesforce Developer Virtual Internship -->
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-6">
+                        <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
+                        <div class="w-1 bg-indigo-600 h-full"></div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-10 w-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Salesforce Developer Virtual Internship</h3>
+                            <span class="text-sm text-indigo-600 font-medium bg-indigo-100 px-3 py-1 rounded-full mt-2 md:mt-0">May - June 2024</span>
+                        </div>
+                        <h4 class="text-gray-600 font-medium mb-3">Salesforce & AICTE NEAT</h4>
+                        <p class="text-gray-600">Completed an 8-week internship covering Salesforce fundamentals, Apex, Lightning Web Components (LWC), and multiple Super Badges like Apex Specialist and Process Automation Specialist.</p>
+                    </div>
+                </div>
+                
+                <!-- Certification 2: Cybersecurity Training -->
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-6">
+                        <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
+                        <div class="w-1 bg-indigo-600 h-full"></div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-10 w-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Cybersecurity Training</h3>
+                            <span class="text-sm text-indigo-600 font-medium bg-indigo-100 px-3 py-1 rounded-full mt-2 md:mt-0">Jan- March 2024</span>
+                        </div>
+                        <h1>AICTE</h1>
+                        <h4 class="text-gray-600 font-medium mb-3">Supported by : Paloalto Networks</h4>
+                        <p class="text-gray-600">Gained knowledge on cybersecurity fundamentals, network security, and best practices to protect digital assets.</p>
+                    </div>
+                </div>
+                
+                <!-- Certification 3: Android Development -->
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-6">
+                        <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
+                        <div class="w-1 bg-indigo-600 h-full"></div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-10 w-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Android Development</h3>
+                            <span class="text-sm text-indigo-600 font-medium bg-indigo-100 px-3 py-1 rounded-full mt-2 md:mt-0">Sep - Nov 2023</span>
+                        </div>
+                        <h1>AICTE</h1>
+                        <h4 class="text-gray-600 font-medium mb-3">Supported by : india edu program 
+                                   Google for Developers
+                        </h4>
+                        <p class="text-gray-600">Completed a training program in Android development, covering app building, UI/UX design, and database integration.</p>
+                    </div>
+                </div>
+                
+                <!-- Certification 4: Additional Certification -->
+            <div class="flex">
+                <div class="flex flex-col items-center mr-6">
+                    <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-10 w-full">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">AWS Cloud</h3>
+                        <span class="text-sm text-indigo-600 font-medium bg-indigo-100 px-3 py-1 rounded-full mt-2 md:mt-0">May - July 2023</span>
+                    </div>
+                    <h1>AICTE</h1>
+                    <h4 class="text-gray-600 font-medium mb-3">Supported by :  AWS Academy</h4>
+                    <p class="text-gray-600">Earned certification in an additional technical domain, enhancing my expertise in emerging technologies.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    
+
+   
+<!-- Contact Section -->
+<section id="contact" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">contact me :</h2>
+            <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4 max-w-xl mx-auto">Let's discuss how I can help bring your ideas to life with clean, efficient, and scalable code.</p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="p-8">
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                        <p class="font-medium text-gray-800">Name:</p>
+                        <p class="text-gray-600">Gnaneswar Arnepalli</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">Email:</p>
+                        <p class="text-gray-600">gnaneswararnepalli074@gmail.com</p>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">mobile no:</p>
+                        <p class="text-gray-600">9390341933</p>
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+                <a href="https://www.linkedin.com/in/gnaneswar-arnepalli-50080428b/" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="https://github.com/Gnaneswar-Arnepalli" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+                
+            </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Skills Section -->
+<section id="skills" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">My Skills</h2>
+            <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4 max-w-xl mx-auto">A combination of technical expertise and soft skills that enable me to deliver exceptional solutions.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Programming Languages -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Programming Languages</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>Java</li>
+                    <li>C</li>
+                    <li>JavaScript</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+
+            <!-- Web Development -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Web Development</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>HTML / CSS</li>
+                    <li>Bootstrap</li>
+                    <li>Salesforce</li>
+                    <li>Spring Boot (Basic)</li>
+                </ul>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Soft Skills</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>Creativity</li>
+                    <li>Flexibility</li>
+                    <li>Communication</li>
+                    <li>Teamwork</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+
+
+
+
+
+
+
+
